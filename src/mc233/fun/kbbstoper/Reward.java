@@ -80,6 +80,7 @@ public class Reward {
         Date thispostdate = thispost.getTime();
         for (int x = index + 1; x < crawler.Time.size(); x++) {
             try {
+                if(!Util.isValidDateFormat(crawler.Time.get(x))) continue;
                 Date lastdate = bbsformat.parse(crawler.Time.get(x));
                 if (lastdate == null) {
                     if (Option.DEBUG.getBoolean()) {

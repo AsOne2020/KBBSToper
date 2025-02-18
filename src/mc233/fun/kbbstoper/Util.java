@@ -14,7 +14,13 @@ public class Util {
 
 	private static BukkitTask autorewardtask;
 	private static ArrayList<Integer> runningtaskidlist = new ArrayList<Integer>();
-
+	// 辅助函数：检查日期格式是否符合预期
+	public static boolean isValidDateFormat(String dateStr) {
+		// 简单的日期格式检查，比如检查长度，或使用正则表达式
+		if(dateStr == null) return false;
+		String regex = "^\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{2}$"; // yyyy-M-d HH:mm
+		return dateStr.matches(regex);
+	}
 	public static void startAutoReward() {// 自动奖励的方法
 		if (autorewardtask != null) {// 任务对象不为空
 			boolean taskcancelled;// 是否已经取消
