@@ -38,7 +38,11 @@ database:
 
 bbs:
     #服务器宣传贴的帖子id
-    url: '1034574'
+    url: '151027'
+    #苦力怕论坛账号
+    username: 'username'
+    #苦力怕论坛密码
+    password: 'password'
     #顶帖列表/玩家排名每页的大小
     pagesize: 10
     #玩家多久能更换一次绑定的id, 单位天
