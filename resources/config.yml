@@ -39,6 +39,8 @@ database:
 bbs:
     #服务器宣传贴的帖子id
     url: '151027'
+    #是否登陆苦力怕论坛
+    login: false
     #苦力怕论坛账号
     username: 'username'
     #苦力怕论坛密码

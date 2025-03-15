@@ -25,6 +25,7 @@ public enum Option {
 	DATABASE_SQLITE_FOLDER("database.sqlite.folder"),
 	DATABASE_SQLITE_DATABASE("database.sqlite.database"),
 	BBS_URL("bbs.url"),
+	BBS_LOGIN("bbs.login"),
 	BBS_USERNAME("bbs.username"),
 	BBS_PASSWORD("bbs.password"),
 	BBS_PAGESIZE("bbs.pagesize"),

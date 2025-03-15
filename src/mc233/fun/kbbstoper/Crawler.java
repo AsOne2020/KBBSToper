@@ -23,7 +23,7 @@ public class Crawler {
     public boolean visible = true;
     public Map<String, String> cookies = null;
     public Crawler() {
-        if (cookies == null) {
+        if (Option.BBS_LOGIN.getBoolean() && cookies == null) {
             login();
         }
         resolveWebData();
@@ -58,7 +58,10 @@ public class Crawler {
         String url = "https://www.klpbbs.com/forum.php?mod=misc&action=viewthreadmod&tid=" + Option.BBS_URL.getString() + "&mobile=no";
         Document doc;
         try {
-            Connection conn = Jsoup.connect(url).cookies(cookies);
+            Connection conn = Jsoup.connect(url);
+            if (Option.BBS_LOGIN.getBoolean() && cookies != null) {
+                conn = Jsoup.connect(url).cookies(cookies);
+            }
             if (Option.PROXY_ENABLE.getBoolean()) {
                 conn = conn.proxy(Option.PROXY_IP.getString(), Option.PROXY_PORT.getInt());
             }
@@ -85,6 +88,9 @@ public class Crawler {
         Element listbody = list.getElementsByTag("tbody").get(0);
         for (Element rows : listbody.getElementsByTag("tr")) {
             Elements cells = rows.getElementsByTag("td");
+            if (cells.size() < 3) {
+                continue;
+            }
             String action = cells.get(2).text();
             if (!(action.equals("提升(提升卡)") || action.equals("提升(服务器/交易代理提升卡)"))) {
                 continue;
