@@ -109,10 +109,14 @@ public class Crawler {
     private String extractTime(Element timecell) {
         Element timespan = timecell.getElementsByTag("span").first();
         if (timespan != null) {
-            return timespan.attr("title");
-        } else {
-            return timecell.text();
+            String title = timespan.attr("title");
+            // 检查title属性是否存在且非空
+            if (!title.isEmpty()) {
+                return title;
+            }
         }
+        // 当没有有效title时，返回整个单元格的文本（自动忽略标签）
+        return timecell.text();
     }
 
     public void kickExpiredData() {
@@ -125,8 +129,8 @@ public class Crawler {
         ListIterator<String> timeIterator = Time.listIterator();
         ListIterator<String> idIterator = ID.listIterator();
 
-        while (timeIterator.hasNext()) {
-            int index = timeIterator.nextIndex(); // 获取当前元素的索引
+        while (timeIterator.hasNext() && idIterator.hasNext()) {
+            String id = idIterator.next(); // 获取当前元素的索引
             String timeStr = timeIterator.next(); // 获取当前时间
 
             if (timeStr == null || timeStr.isEmpty()) {
